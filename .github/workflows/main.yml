@@ -14,4 +14,4 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
       - name: Build with Maven
-        run: mvn -B clean test --file testci-common-email/commons-email-1.3.2-src/pom.xml
+        run: mvn -B clean test -f testci-common-email/commons-email-1.3.2-src/pom.xml
