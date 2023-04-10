@@ -1,0 +1,9 @@
+language: java
+jdk:
+  - openjdk11
+
+before_install:
+  - chmod +x mvnw
+
+script:
+  - ./mvnw clean test
