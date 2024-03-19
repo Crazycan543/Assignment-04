@@ -16,6 +16,8 @@
  */
 package org.apache.commons.mail;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -212,7 +214,7 @@ public class HtmlEmail extends MultiPartEmail
     {
         try
         {
-            return embed(new URL(urlString), name);
+            return embed(Urls.create(urlString, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), name);
         }
         catch (MalformedURLException e)
         {

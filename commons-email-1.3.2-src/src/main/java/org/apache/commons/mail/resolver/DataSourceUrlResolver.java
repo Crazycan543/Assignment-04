@@ -16,6 +16,8 @@
  */
 package org.apache.commons.mail.resolver;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import javax.activation.DataSource;
 import javax.activation.URLDataSource;
 import java.io.IOException;
@@ -115,7 +117,7 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver
         // be directly used to create an URL
         if (baseUrl == null)
         {
-            return new URL(resourceLocation);
+            return Urls.create(resourceLocation, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         }
 
         // if we get an non-existing location what we shall do?
@@ -127,9 +129,9 @@ public class DataSourceUrlResolver extends DataSourceBaseResolver
         // if we get a stand-alone resource than ignore the base url
         if (isFileUrl(resourceLocation) || isHttpUrl(resourceLocation))
         {
-            return new URL(resourceLocation);
+            return Urls.create(resourceLocation, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         }
 
-        return new URL(getBaseUrl(), resourceLocation.replaceAll("&amp;", "&"));
+        return Urls.create(getBaseUrl(), resourceLocation.replaceAll("&amp;", "&"), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
     }
 }
