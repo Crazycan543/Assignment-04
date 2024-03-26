@@ -17,6 +17,7 @@
 
 package org.apache.commons.mail;
 
+import java.security.SecureRandom;
 import org.apache.commons.mail.util.MimeMessageUtils;
 
 import javax.mail.internet.MimeMessage;
@@ -49,7 +50,7 @@ final class EmailUtils
      * Random object used by random method. This has to be not local to the random method
      * so as to not return the same value in the same millisecond.
      */
-    private static final Random RANDOM = new Random();
+    private static final Random RANDOM = new SecureRandom();
 
     /**
      * The default charset used for URL encoding.
